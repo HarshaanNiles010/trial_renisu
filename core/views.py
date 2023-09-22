@@ -48,3 +48,6 @@ def product_detail_view(request, pid):
     }
     
     return render(request,'core/product-detail.html',context)
+
+def wip_view(request):
+    return render(request, "core/wip.html")
