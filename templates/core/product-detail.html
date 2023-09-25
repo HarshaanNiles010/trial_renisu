@@ -103,14 +103,37 @@
                                             <li class="nav-item">
                                                 <a class="nav-link" id="Additional-info-tab" data-bs-toggle="tab" href="#Additional-info">Additional info</a>
                                             </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link" id="Reviews-tab" data-bs-toggle="tab" href="#Reviews">Reviews (3)</a>
-                                            </li>
                                         </ul>
                                         <div class="tab-content shop_info_tab entry-main-content">
                                             <div class="tab-pane fade show active" id="Description">
                                                 <div class="">
                                                     <p> {{product.description|safe}} </p>
+                                                    <ul class="nav-item">
+                                                        <a class="nav-link" id="Reviews-tab" data-bs-toggle="tab" href="#Reviews">Reviews ({{reviews.count}})</a>
+                                                    </ul>
+                                                    {% for r in reviews%}
+                                                        <div class="single-comment justify-content-between d-flex mb-30">
+                                                            <div class="user justify-content-between d-flex">
+                                                                <div class="thumb text-center">
+                                                                    <a href="#" class="font-heading text-brand">{{r.user.username|title}}</a>
+                                                                </div>
+
+                                                                <div class="desc">
+                                                                    <div class="d-flex justify-content-between mb-10">
+                                                                        <div class="d-flex align-items-center">
+                                                                            <span class="font-xs text-muted">{{r.date|date:"d M, Y"}} </span>
+                                                                        </div>
+                                                                        <!--<div>
+                                                                            {% for star in r.rating|ljust:r.rating %}
+                                                                            <i class="fas fa-star text-warning"></i>
+                                                                            {% endfor %}
+                                                                        </div>-->
+                                                                    </div>
+                                                                    <p class="mb-10">{{r.review}}</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    {% endfor %}
                                                 </div>
                                             </div>
                                             <!--<div class="tab-pane fade" id="Additional-info">
@@ -203,113 +226,20 @@
                                                     </tbody>
                                                 </table>
                                             </div>-->
-                                            <!--<div class="tab-pane fade" id="Vendor-info">
-                                                <div class="vendor-logo d-flex mb-30">
-                                                    <img src="{% static 'assets/imgs/vendor/vendor-18.svg' %}" alt="" />
-                                                    <div class="vendor-name ml-15">
-                                                        <h6>
-                                                            <a href="vendor-details-2.html">Noodles Co.</a>
-                                                        </h6>
-                                                        <div class="product-rate-cover text-end">
-                                                            <div class="product-rate d-inline-block">
-                                                                <div class="product-rating" style="width: 90%"></div>
-                                                            </div>
-                                                            <span class="font-small ml-5 text-muted"> (32 reviews)</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <ul class="contact-infor mb-50">
-                                                    <li><img src="{% static 'assets/imgs/theme/icons/icon-location.svg' %}" alt="" /><strong>Address: </strong> <span>5171 W Campbell Ave undefined Kent, Utah 53127 United States</span></li>
-                                                    <li><img src="{% static 'assets/imgs/theme/icons/icon-contact.svg' %}" alt="" /><strong>Contact Seller:</strong><span>(+91) - 540-025-553</span></li>
-                                                </ul>
-                                                <div class="d-flex mb-55">
-                                                    <div class="mr-30">
-                                                        <p class="text-brand font-xs">Rating</p>
-                                                        <h4 class="mb-0">92%</h4>
-                                                    </div>
-                                                    <div class="mr-30">
-                                                        <p class="text-brand font-xs">Ship on time</p>
-                                                        <h4 class="mb-0">100%</h4>
-                                                    </div>
-                                                    <div>
-                                                        <p class="text-brand font-xs">Chat response</p>
-                                                        <h4 class="mb-0">89%</h4>
-                                                    </div>
-                                                </div>
-                                                <p>Noodles & Company is an American fast-casual restaurant that offers international and American noodle dishes and pasta in addition to soups and salads. Noodles & Company was founded in 1995 by Aaron Kennedy
-                                                    and is headquartered in Broomfield, Colorado. The company went public in 2013 and recorded a $457 million revenue in 2017.In late 2018, there were 460 Noodles & Company locations across 29 states and
-                                                    Washington, D.C.</p>
-                                            </div>-->
                                             <div class="tab-pane fade" id="Reviews">
                                                 <!--Comments-->
-                                                <!--<div class="comments-area">
+                                                <div class="comments-area">
                                                     <div class="row">
                                                         <div class="col-lg-8">
                                                             <h4 class="mb-30">Customer questions & answers</h4>
                                                             <div class="comment-list">
-                                                                <div class="single-comment justify-content-between d-flex mb-30">
-                                                                    <div class="user justify-content-between d-flex">
-                                                                        <div class="thumb text-center">
-                                                                            <img src="{% static 'assets/imgs/blog/author-2.png' %}" alt="" />
-                                                                            <a href="#" class="font-heading text-brand">Sienna</a>
-                                                                        </div>
-                                                                        <div class="desc">
-                                                                            <div class="d-flex justify-content-between mb-10">
-                                                                                <div class="d-flex align-items-center">
-                                                                                    <span class="font-xs text-muted">December 4, 2022 at 3:12 pm </span>
-                                                                                </div>
-                                                                                <div class="product-rate d-inline-block">
-                                                                                    <div class="product-rating" style="width: 100%"></div>
-                                                                                </div>
-                                                                            </div>
-                                                                            <p class="mb-10">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus, suscipit exercitationem accusantium obcaecati quos voluptate nesciunt facilis itaque modi commodi dignissimos
-                                                                                sequi repudiandae minus ab deleniti totam officia id incidunt? <a href="#" class="reply">Reply</a></p>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="single-comment justify-content-between d-flex mb-30 ml-30">
-                                                                    <div class="user justify-content-between d-flex">
-                                                                        <div class="thumb text-center">
-                                                                            <img src="{% static 'assets/imgs/blog/author-3.png' %}" alt="" />
-                                                                            <a href="#" class="font-heading text-brand">Brenna</a>
-                                                                        </div>
-                                                                        <div class="desc">
-                                                                            <div class="d-flex justify-content-between mb-10">
-                                                                                <div class="d-flex align-items-center">
-                                                                                    <span class="font-xs text-muted">December 4, 2022 at 3:12 pm </span>
-                                                                                </div>
-                                                                                <div class="product-rate d-inline-block">
-                                                                                    <div class="product-rating" style="width: 80%"></div>
-                                                                                </div>
-                                                                            </div>
-                                                                            <p class="mb-10">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus, suscipit exercitationem accusantium obcaecati quos voluptate nesciunt facilis itaque modi commodi dignissimos
-                                                                                sequi repudiandae minus ab deleniti totam officia id incidunt? <a href="#" class="reply">Reply</a></p>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="single-comment justify-content-between d-flex">
-                                                                    <div class="user justify-content-between d-flex">
-                                                                        <div class="thumb text-center">
-                                                                            <img src="{% static 'assets/imgs/blog/author-4.png' %}" alt="" />
-                                                                            <a href="#" class="font-heading text-brand">Gemma</a>
-                                                                        </div>
-                                                                        <div class="desc">
-                                                                            <div class="d-flex justify-content-between mb-10">
-                                                                                <div class="d-flex align-items-center">
-                                                                                    <span class="font-xs text-muted">December 4, 2022 at 3:12 pm </span>
-                                                                                </div>
-                                                                                <div class="product-rate d-inline-block">
-                                                                                    <div class="product-rating" style="width: 80%"></div>
-                                                                                </div>
-                                                                            </div>
-                                                                            <p class="mb-10">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus, suscipit exercitationem accusantium obcaecati quos voluptate nesciunt facilis itaque modi commodi dignissimos
-                                                                                sequi repudiandae minus ab deleniti totam officia id incidunt? <a href="#" class="reply">Reply</a></p>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
+                                                                {% for r in reviews %}
+                                                                <p> {{r.review}}</p>
+                                                                
+                                                                {% endfor %}
                                                             </div>
                                                         </div>
-                                                        <div class="col-lg-4">
+                                                        <!--<div class="col-lg-4">
                                                             <h4 class="mb-30">Customer reviews</h4>
                                                             <div class="d-flex mb-30">
                                                                 <div class="product-rate d-inline-block mr-15">
@@ -338,9 +268,9 @@
                                                                 <div class="progress-bar" role="progressbar" style="width: 85%" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100">85%</div>
                                                             </div>
                                                             <a href="#" class="font-xs text-muted">How are ratings calculated?</a>
-                                                        </div>
+                                                        </div>-->
                                                     </div>
-                                                </div>-->
+                                                </div>
                                                 <!--comment form-->
                                                 <div class="comment-form">
                                                     <h4 class="mb-15">Add a review</h4>

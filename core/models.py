@@ -225,6 +225,9 @@ class ProductReview(models.Model):
 
     def get_rating(self):
         return self.rating
+    
+    def get_review(self):
+        return self.review
 
 
 
