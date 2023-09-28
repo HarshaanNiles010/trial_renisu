@@ -9,5 +9,6 @@ urlpatterns = [
      path("category/",views.category_list_view, name = "category-list"),
      path("category/<cid>/",views.category_product_list_view, name = "category-product-list"),
      path("product/<pid>/",views.product_detail_view, name = "product-detail"),
+     # This url is only used for work in progress apps
      path('wip/',views.wip_view, name = "wip" )
 ]
