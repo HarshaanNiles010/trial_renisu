@@ -1,32 +1,3 @@
-    /***
-    Theme Name: Nest
-    Description: Grocery, Super Market, eCommerce HTML Template
-    Version: 1.0
-    License: GNU General Public License v2 or later
-    License URI: http://www.gnu.org/licenses/gpl-2.0.html
-    ==============================
-    TABLE CONTENT
-    Import Google Fonts
-    Include Third Party CSS Library
-    GENERAL
-    HEADER
-    Offcanvas Sidebar
-    Search form
-    Main header
-    Mega menu
-    Header layouts
-    Page layouts
-    Pagination
-    Breadcrumb
-    CATEGORY PAGES
-    SINGLE POST
-    Author box
-    comment
-    Post share social
-    WP STYPE
-    Custom amine
-    ***/
-
 @import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,400;1,700&family=Quicksand:wght@400;500;600;700&display=swap");
 /*import vendors*/
 
@@ -1770,7 +1741,7 @@ label {
     font-size: 14px;
     color: #999999;
     margin-bottom: 0;
-    margin-left: 20px;
+    margin-left: 200px;
 }
 
 .comments-area .comment {
@@ -6515,7 +6486,7 @@ h6.post-title {
     margin: 3px;
     display: inline-block;
     vertical-align: middle;
-    -webkit-appearance: none;
+    appearance: none;
     text-transform: capitalize;
     -webkit-transition: all 0.3s linear;
     transition: all 0.3s linear;
@@ -7770,8 +7741,8 @@ h6.post-title {
     background-color: #fff;
     -webkit-transition: all .3s ease 0s;
     transition: all .3s ease 0s;
-    -moz-appearance: none;
-    -webkit-appearance: none;
+    appearance: none;
+    appearance: none;
     position: relative;
 }
 

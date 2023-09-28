@@ -55,3 +55,12 @@ def product_detail_view(request, pid):
 
 def wip_view(request):
     return render(request, "core/wip.html")
+
+#def product_review_view(request, pid):
+#    product = Product.objects.get(pid = pid)
+#    reviews = ProductReview.objects.filter(product = product)
+#    context = {
+#        "product" : product,
+#        "reviews" : reviews
+#    }
+#    return render(request, '')
