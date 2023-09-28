@@ -42,12 +42,25 @@ def category_product_list_view(request, cid):
 def product_detail_view(request, pid):
     product = Product.objects.get(pid=pid)
     p_images = product.p_images.all()
+    #products = Product.objects.filter(category=product.category).exclude(pid)
+    reviews = ProductReview.objects.filter(product=product)
     context = {
         "product":product,
         "p_images":p_images,
+        #"products":products,
+        "reviews":reviews
     }
-    
+    #print(reviews.review)
     return render(request,'core/product-detail.html',context)
 
 def wip_view(request):
     return render(request, "core/wip.html")
+
+#def product_review_view(request, pid):
+#    product = Product.objects.get(pid = pid)
+#    reviews = ProductReview.objects.filter(product = product)
+#    context = {
+#        "product" : product,
+#        "reviews" : reviews
+#    }
+#    return render(request, '')
