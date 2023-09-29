@@ -228,6 +228,11 @@
                                                                                     <div class="d-flex align-items-center">
                                                                                         <span class="font-xs text-muted">{{r.date|date:"d M, Y"}} </span>
                                                                                     </div>
+                                                                                    <div>
+                                                                                    {% for s in r.rating|ljust:r.rating%}
+                                                                                        <i class="fas fa-star text-warning"> </i>
+                                                                                    {%endfor%}
+                                                                                    </div>
                                                                                 </div>
                                                                                 <p class="mb-10">{{r.review}}</p>
                                                                             </div>
@@ -236,23 +241,62 @@
                                                                 {% endfor %}
                                                             </div>
                                                         </div>
+                                                        <div class="col-lg-4">
+                                                            <h4 class="mb-30">Customer reviews</h4>
+                                                            <div class="d-fdlex mb-30">
+                                                                <!-- <div class="product-rate d-inline-block mr-15"> -->
+                                                                    <!-- <div class="product-rating" style="width: 90%"></div> -->
+                                                                <!-- </div> -->
+                                                                <!-- <div >
+                                                                    <p">★☆★☆★☆</p>
+                                                                </div>
+                                                                <br> -->
+                                                                <h6>{{ average_rating.rating|floatformat:1 }} out of 5.0</h6>
+                                                            </div>
+                                                            <div class="progress">
+                                                                <span>5 star</span>
+                                                                <div class="progress-bar" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">50%</div>
+                                                            </div>
+                                                            <div class="progress">
+                                                                <span>4 star</span>
+                                                                <div class="progress-bar" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+                                                            </div>
+                                                            <div class="progress">
+                                                                <span>3 star</span>
+                                                                <div class="progress-bar" role="progressbar" style="width: 45%" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100">45%</div>
+                                                            </div>
+                                                            <div class="progress">
+                                                                <span>2 star</span>
+                                                                <div class="progress-bar" role="progressbar" style="width: 65%" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100">65%</div>
+                                                            </div>
+                                                            <div class="progress mb-30">
+                                                                <span>1 star</span>
+                                                                <div class="progress-bar" role="progressbar" style="width: 85%" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100">85%</div>
+                                                            </div>
+                                                            <a href="#" class="font-xs text-muted">How are ratings calculated?</a>
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 <!--comment form-->
+                                                {%if request.user.is_authenticated%}
+                                                {% if make_review%}
+                                                
                                                 <div class="comment-form">
                                                     <h4 class="mb-15">Add a review</h4>
-                                                    <div class="product-rate d-inline-block mb-30"></div>
+                                                    <stong class="text-success" id="review-res"> </strong>
+                                                    <!--<div class="product-rate d-inline-block mb-30"></div>-->
                                                     <div class="row">
                                                         <div class="col-lg-8 col-md-12">
-                                                            <form class="form-contact comment_form" action="#" id="commentForm">
+                                                            <form class="form-contact comment_form hide-comment-form" action="{% url 'core:ajax-add-review' product.pid %}" id="commentForm" method="POST">
+                                                                {% csrf_token %}
                                                                 <div class="row">
                                                                     <div class="col-12">
                                                                         <div class="form-group">
-                                                                            <p> This is the text input area</p>
-                                                                            <textarea class="form-control w-100" name="comment" id="comment" cols="30" rows="9" placeholder="Write Comment"></textarea>
+                                                                            {{review_form.review}}
+                                                                            <!--<textarea class="form-control w-100" name="comment" id="comment" cols="30" rows="9" placeholder="Write Comment"></textarea>-->
                                                                         </div>
                                                                     </div>
-                                                                    <div class="col-sm-6">
+                                                                    <!--<div class="col-sm-6">
                                                                         <div class="form-group">
                                                                             <input class="form-control" name="name" id="name" type="text" placeholder="Name" />
                                                                         </div>
@@ -261,10 +305,11 @@
                                                                         <div class="form-group">
                                                                             <input class="form-control" name="email" id="email" type="email" placeholder="Email" />
                                                                         </div>
-                                                                    </div>
+                                                                    </div>-->
                                                                     <div class="col-12">
                                                                         <div class="form-group">
-                                                                            <input class="form-control" name="website" id="website" type="text" placeholder="Website" />
+                                                                            {{review_form.rating}}
+                                                                            <!--<input class="form-control" name="website" id="website" type="text" placeholder="Website" />-->
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -275,6 +320,8 @@
                                                         </div>
                                                     </div>
                                                 </div>
+                                                {% endif %}
+                                                {% endif %}
                                             </div>
                                         </div>
                                     </div>
