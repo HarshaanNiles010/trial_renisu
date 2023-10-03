@@ -44,3 +44,84 @@ $("#commentForm").submit(function(e){
         }
     })
 })
+
+
+// Add to cart functionality
+//$("#add-to-cart-btn").on("click",function(){
+//    console.log("making add to cart");
+//    let quantity = $("#product-quantity").val();
+    //console.log(quantity);
+//    let product_title = $(".product-title").val();
+    //console.log(product_title);
+//    let product_id = $(".product-id").val();
+    //console.log(product_id);
+//    let product_price = $("#current-product-price").text();
+    //console.log(product_price);
+//    let this_val = $(this);
+
+//    $.ajax({
+//        url: '/add-to-cart',
+//        data: {
+//            'id':product_id,
+//            'qty': quantity,
+//            'title': product_title,
+//            'price': product_price,
+//        },
+//        dataType: 'json',
+//        beforeSend: function(){
+//            console.log("Adding product to cart");
+//        },
+//        success: function(response){
+//            this_val.html("<i class='fas fa-check-circle'></i>")
+//            console.log("added product to cart");
+//            $(".cart-items-count").text(response.totalCartItems)
+//        }
+//    })
+//})
+
+$(".add-to-cart-btn").on("click",function(){
+    let this_val = $(this)
+    //console.log(this_val);
+    let index_val = this_val.attr("data-index")
+    //console.log(index_val);
+    let quantity = $(".product-quantity-" + index_val).val();
+    //console.log(quantity);
+    let product_title = $(".product-title-" + index_val).val();
+    //console.log(product_title);
+    let product_id = $(".product-id-" + index_val).val();
+    //console.log(product_id);
+    let product_price = $(".current-product-price-" + index_val).text();
+    //console.log(product_price);
+    let product_pid = $(".product-pid-" + index_val).val();
+    //console.log(product_pid);
+    let product_image = $(".product-image-" + index_val).val();
+
+    $.ajax({
+        url: '/add-to-cart',
+        data: {
+            'id':product_id,
+            'pid':product_pid,
+            'price':product_price,
+            'quantity': quantity,
+            'title': product_title,
+            'img':product_image,
+            'qty':quantity
+        },
+        dataType:'json',
+        beforeSend:function(){
+            console.log("Adding product to cart");
+        },
+        success: function(response){
+            this_val.html("<i class='fas fa-check-circle'></i>")
+            console.log("added product to cart");
+            $(".cart-items-count").text(response.totalCartItems)
+        }
+    })
+})
+
+$(".delete-product").on("click", function(){
+    let product_id = $(this).attr("data-product")
+    let this_val = $(this)
+    console.log(product_id);
+    console.log(this_val);
+})

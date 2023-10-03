@@ -63,8 +63,8 @@
                                                 </div>
                                                 <div class="product-action-1">
                                                     <a aria-label="Add To Wishlist" class="action-btn" href="shop-wishlist.html"><i class="fi-rs-heart"></i></a>
-                                                    <a aria-label="Compare" class="action-btn" href="shop-compare.html"><i class="fi-rs-shuffle"></i></a>
-                                                    <a aria-label="Quick view" class="action-btn" data-bs-toggle="modal" data-bs-target="#quickViewModal"><i class="fi-rs-eye"></i></a>
+                                                    <!--<a aria-label="Compare" class="action-btn" href="shop-compare.html"><i class="fi-rs-shuffle"></i></a>-->
+                                                    <a aria-label="View Product" href="{% url 'core:product-detail' p.pid %}" class="action-btn"><i class="fi-rs-eye"></i></a>
                                                 </div>
                                                 <div class="product-badges product-badges-position product-badges-mrg">
                                                     <span class="hot">-{{p.get_precentage|floatformat:0}}%</span>
@@ -72,9 +72,9 @@
                                             </div>
                                             <div class="product-content-wrap">
                                                 <div class="product-category">
-                                                    <a href="shop-grid-right.html">{{p.category.title}}</a>
+                                                    <a href="{% url 'core:product-detail' p.pid%}">{{p.category.title}}</a>
                                                 </div>
-                                                <h2><a href="shop-product-right.html">{{p.title}}</a></h2>
+                                                <h2><a href="{% url 'core:product-detail' p.pid%}">{{p.title}}</a></h2>
                                                 <div class="product-rate-cover">
                                                     <div class="product-rate d-inline-block">
                                                         <div class="product-rating" style="width: 90%"></div>
@@ -84,13 +84,24 @@
                                                 <!-- <div>
                                                     <span class="font-small text-muted">By <a href="vendor-details-1.html">NestFood</a></span>
                                                 </div>-->
+                                                
                                                 <div class="product-card-bottom">
                                                     <div class="product-price">
-                                                        <span>${{p.price}}</span>
+                                                        <span>$</span><span class="current-product-price-{{p.id}}">{{p.price}}</span>
                                                         <span class="old-price">${{p.old_price}}</span>
                                                     </div>
+                                                    <br>
                                                     <div class="add-cart">
-                                                        <a class="add" href="shop-cart.html"><i class="fi-rs-shopping-cart mr-5"></i>Add </a>
+                                                            <input type="hidden" value="1" class="product-quantity-{{p.id}}">
+                                                            <input type="hidden" class="product-pid-{{ p.id }}" value="{{ p.pid }}">
+                                                            <input type="hidden" class="product-image-{{ p.id }}" value="{{ p.image.url }}">
+                                                            <input type="hidden" class="product-id-{{ p.id }}" value="{{ p.id }}">
+                                                            <input type="hidden" class="product-title-{{ p.id }}" value="{{ p.title }}">
+                                                        <!--<a class="add" href="shop-cart.html"><i class="fi-rs-shopping-cart mr-5"></i>Add </a>-->
+                                                        <div class="d-flex">
+                                                            <button class="add add-to-cart-btn" data-index="{{ p.id }}" style="border: none 5px;" id="add-to-cart-btn"><i class="fi-rs-shopping-cart mr-5"></i>Add</button>
+                                                            <button style="border: none; background: none;" class="add-to-wishlist" data-product-item="{{p.id}}"><i class="fi-rs-heart" style="fill: aqua;"></i></button>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -104,7 +115,7 @@
                             <!--En tab one-->
                             <div class="tab-pane fade" id="tab-two" role="tabpanel" aria-labelledby="tab-two">
                                 <div class="row product-grid-4">
-                                    <div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
+                                    <!--<div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
                                         <div class="product-cart-wrap mb-30">
                                             <div class="product-img-action-wrap">
                                                 <div class="product-img product-img-zoom">
@@ -116,7 +127,7 @@
                                                 <div class="product-action-1">
                                                     <a aria-label="Add To Wishlist" class="action-btn" href="shop-wishlist.html"><i class="fi-rs-heart"></i></a>
                                                     <a aria-label="Compare" class="action-btn" href="shop-compare.html"><i class="fi-rs-shuffle"></i></a>
-                                                    <a aria-label="Quick view" class="action-btn" data-bs-toggle="modal" data-bs-target="#quickViewModal"><i class="fi-rs-eye"></i></a>
+                                                    <a aria-label="Quick view" class="action-btn" data-bs-toggle="modal" data-bs-target="#quickViewModal" href="#" ><i class="fi-rs-eye"></i></a>
                                                 </div>
                                                 <div class="product-badges product-badges-position product-badges-mrg">
                                                     <span class="hot">Hot</span>
@@ -147,9 +158,9 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div>-->
                                     <!--end product card-->
-                                    <div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
+                                    <!--<div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
                                         <div class="product-cart-wrap mb-30">
                                             <div class="product-img-action-wrap">
                                                 <div class="product-img product-img-zoom">
@@ -161,7 +172,7 @@
                                                 <div class="product-action-1">
                                                     <a aria-label="Add To Wishlist" class="action-btn" href="shop-wishlist.html"><i class="fi-rs-heart"></i></a>
                                                     <a aria-label="Compare" class="action-btn" href="shop-compare.html"><i class="fi-rs-shuffle"></i></a>
-                                                    <a aria-label="Quick view" class="action-btn" data-bs-toggle="modal" data-bs-target="#quickViewModal"><i class="fi-rs-eye"></i></a>
+                                                    <a aria-label="Quick view" class="action-btn" data-bs-toggle="modal" data-bs-target="#quickViewModal" href="#"><i class="fi-rs-eye"></i></a>
                                                 </div>
                                                 <div class="product-badges product-badges-position product-badges-mrg">
                                                     <span class="sale">Sale</span>
@@ -192,9 +203,9 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div>-->
                                     <!--end product card-->
-                                    <div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
+                                    <!--<div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
                                         <div class="product-cart-wrap mb-30">
                                             <div class="product-img-action-wrap">
                                                 <div class="product-img product-img-zoom">
@@ -237,9 +248,9 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div>-->
                                     <!--end product card-->
-                                    <div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
+                                    <!--<div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
                                         <div class="product-cart-wrap mb-30">
                                             <div class="product-img-action-wrap">
                                                 <div class="product-img product-img-zoom">
@@ -279,9 +290,9 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div>-->
                                     <!--end product card-->
-                                    <div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
+                                    <!--<div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
                                         <div class="product-cart-wrap mb-30">
                                             <div class="product-img-action-wrap">
                                                 <div class="product-img product-img-zoom">
@@ -324,9 +335,9 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div>-->
                                     <!--end product card-->
-                                    <div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
+                                    <!--<div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
                                         <div class="product-cart-wrap">
                                             <div class="product-img-action-wrap">
                                                 <div class="product-img product-img-zoom">
@@ -366,9 +377,9 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div>-->
                                     <!--end product card-->
-                                    <div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
+                                    <!--<div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
                                         <div class="product-cart-wrap">
                                             <div class="product-img-action-wrap">
                                                 <div class="product-img product-img-zoom">
@@ -408,9 +419,9 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div>-->
                                     <!--end product card-->
-                                    <div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
+                                    <!--<div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
                                         <div class="product-cart-wrap">
                                             <div class="product-img-action-wrap">
                                                 <div class="product-img product-img-zoom">
@@ -453,9 +464,9 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div>-->
                                     <!--end product card-->
-                                    <div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
+                                    <!--<div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
                                         <div class="product-cart-wrap">
                                             <div class="product-img-action-wrap">
                                                 <div class="product-img product-img-zoom">
@@ -498,9 +509,9 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div>-->
                                     <!--end product card-->
-                                    <div class="col-lg-1-5 col-md-4 col-12 col-sm-6 d-none d-xl-block">
+                                    <!--<div class="col-lg-1-5 col-md-4 col-12 col-sm-6 d-none d-xl-block">
                                         <div class="product-cart-wrap">
                                             <div class="product-img-action-wrap">
                                                 <div class="product-img product-img-zoom">
@@ -540,7 +551,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div>-->
                                     <!--end product card-->
                                 </div>
                                 <!--End product-grid-4-->
@@ -548,7 +559,7 @@
                             <!--En tab two-->
                             <div class="tab-pane fade" id="tab-three" role="tabpanel" aria-labelledby="tab-three">
                                 <div class="row product-grid-4">
-                                    <div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
+                                    <!--<div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
                                         <div class="product-cart-wrap mb-30">
                                             <div class="product-img-action-wrap">
                                                 <div class="product-img product-img-zoom">
@@ -591,9 +602,9 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div>-->
                                     <!--end product card-->
-                                    <div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
+                                    <!--<div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
                                         <div class="product-cart-wrap mb-30">
                                             <div class="product-img-action-wrap">
                                                 <div class="product-img product-img-zoom">
@@ -636,9 +647,9 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div>-->
                                     <!--end product card-->
-                                    <div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
+                                    <!--<div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
                                         <div class="product-cart-wrap mb-30">
                                             <div class="product-img-action-wrap">
                                                 <div class="product-img product-img-zoom">
@@ -681,9 +692,9 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div>-->
                                     <!--end product card-->
-                                    <div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
+                                    <!--<div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
                                         <div class="product-cart-wrap mb-30">
                                             <div class="product-img-action-wrap">
                                                 <div class="product-img product-img-zoom">
@@ -723,9 +734,9 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div>-->
                                     <!--end product card-->
-                                    <div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
+                                    <!--<div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
                                         <div class="product-cart-wrap mb-30">
                                             <div class="product-img-action-wrap">
                                                 <div class="product-img product-img-zoom">
@@ -768,9 +779,9 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div>-->
                                     <!--end product card-->
-                                    <div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
+                                    <!--<div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
                                         <div class="product-cart-wrap">
                                             <div class="product-img-action-wrap">
                                                 <div class="product-img product-img-zoom">
@@ -810,9 +821,9 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div>-->
                                     <!--end product card-->
-                                    <div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
+                                    <!--<div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
                                         <div class="product-cart-wrap">
                                             <div class="product-img-action-wrap">
                                                 <div class="product-img product-img-zoom">
@@ -852,9 +863,9 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div>-->
                                     <!--end product card-->
-                                    <div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
+                                    <!--<div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
                                         <div class="product-cart-wrap">
                                             <div class="product-img-action-wrap">
                                                 <div class="product-img product-img-zoom">
@@ -897,9 +908,9 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div>-->
                                     <!--end product card-->
-                                    <div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
+                                    <!--<div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
                                         <div class="product-cart-wrap">
                                             <div class="product-img-action-wrap">
                                                 <div class="product-img product-img-zoom">
@@ -942,9 +953,9 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div>-->
                                     <!--end product card-->
-                                    <div class="col-lg-1-5 col-md-4 col-12 col-sm-6 d-none d-xl-block">
+                                    <!--<div class="col-lg-1-5 col-md-4 col-12 col-sm-6 d-none d-xl-block">
                                         <div class="product-cart-wrap">
                                             <div class="product-img-action-wrap">
                                                 <div class="product-img product-img-zoom">
@@ -984,7 +995,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div>-->
                                     <!--end product card-->
                                 </div>
                                 <!--End product-grid-4-->
@@ -992,7 +1003,7 @@
                             <!--En tab three-->
                             <div class="tab-pane fade" id="tab-four" role="tabpanel" aria-labelledby="tab-four">
                                 <div class="row product-grid-4">
-                                    <div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
+                                    <!--<div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
                                         <div class="product-cart-wrap mb-30">
                                             <div class="product-img-action-wrap">
                                                 <div class="product-img product-img-zoom">
@@ -1035,9 +1046,9 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div>-->
                                     <!--end product card-->
-                                    <div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
+                                    <!--<div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
                                         <div class="product-cart-wrap mb-30">
                                             <div class="product-img-action-wrap">
                                                 <div class="product-img product-img-zoom">
@@ -1080,9 +1091,9 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div>-->
                                     <!--end product card-->
-                                    <div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
+                                    <!--<div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
                                         <div class="product-cart-wrap mb-30">
                                             <div class="product-img-action-wrap">
                                                 <div class="product-img product-img-zoom">
@@ -1125,9 +1136,9 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div>-->
                                     <!--end product card-->
-                                    <div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
+                                    <!--<div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
                                         <div class="product-cart-wrap mb-30">
                                             <div class="product-img-action-wrap">
                                                 <div class="product-img product-img-zoom">
@@ -1167,9 +1178,9 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div>-->
                                     <!--end product card-->
-                                    <div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
+                                    <!--<div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
                                         <div class="product-cart-wrap mb-30">
                                             <div class="product-img-action-wrap">
                                                 <div class="product-img product-img-zoom">
@@ -1212,9 +1223,9 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div>-->
                                     <!--end product card-->
-                                    <div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
+                                    <!--<div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
                                         <div class="product-cart-wrap mb-30">
                                             <div class="product-img-action-wrap">
                                                 <div class="product-img product-img-zoom">
@@ -1254,9 +1265,9 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div>-->
                                     <!--end product card-->
-                                    <div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
+                                    <!--<div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
                                         <div class="product-cart-wrap">
                                             <div class="product-img-action-wrap">
                                                 <div class="product-img product-img-zoom">
@@ -1296,9 +1307,9 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div>-->
                                     <!--end product card-->
-                                    <div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
+                                    <!--<div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
                                         <div class="product-cart-wrap">
                                             <div class="product-img-action-wrap">
                                                 <div class="product-img product-img-zoom">
@@ -1341,9 +1352,9 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div>-->
                                     <!--end product card-->
-                                    <div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
+                                    <!--<div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
                                         <div class="product-cart-wrap">
                                             <div class="product-img-action-wrap">
                                                 <div class="product-img product-img-zoom">
@@ -1386,9 +1397,9 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div>-->
                                     <!--end product card-->
-                                    <div class="col-lg-1-5 col-md-4 col-12 col-sm-6 d-none d-xl-block">
+                                    <!--<div class="col-lg-1-5 col-md-4 col-12 col-sm-6 d-none d-xl-block">
                                         <div class="product-cart-wrap">
                                             <div class="product-img-action-wrap">
                                                 <div class="product-img product-img-zoom">
@@ -1428,7 +1439,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div>-->
                                     <!--end product card-->
                                 </div>
                                 <!--End product-grid-4-->
@@ -1436,7 +1447,7 @@
                             <!--En tab four-->
                             <div class="tab-pane fade" id="tab-five" role="tabpanel" aria-labelledby="tab-five">
                                 <div class="row product-grid-4">
-                                    <div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
+                                    <!--<div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
                                         <div class="product-cart-wrap mb-30">
                                             <div class="product-img-action-wrap">
                                                 <div class="product-img product-img-zoom">
@@ -1479,9 +1490,9 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div>-->
                                     <!--end product card-->
-                                    <div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
+                                    <!--<div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
                                         <div class="product-cart-wrap mb-30">
                                             <div class="product-img-action-wrap">
                                                 <div class="product-img product-img-zoom">
@@ -1524,9 +1535,9 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div>-->
                                     <!--end product card-->
-                                    <div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
+                                    <!--<div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
                                         <div class="product-cart-wrap mb-30">
                                             <div class="product-img-action-wrap">
                                                 <div class="product-img product-img-zoom">
@@ -1569,9 +1580,9 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div>-->
                                     <!--end product card-->
-                                    <div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
+                                    <!--<div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
                                         <div class="product-cart-wrap mb-30">
                                             <div class="product-img-action-wrap">
                                                 <div class="product-img product-img-zoom">
@@ -1611,9 +1622,9 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div>-->
                                     <!--end product card-->
-                                    <div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
+                                    <!--<div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
                                         <div class="product-cart-wrap mb-30">
                                             <div class="product-img-action-wrap">
                                                 <div class="product-img product-img-zoom">
@@ -1656,9 +1667,9 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div>-->
                                     <!--end product card-->
-                                    <div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
+                                    <!--<div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
                                         <div class="product-cart-wrap">
                                             <div class="product-img-action-wrap">
                                                 <div class="product-img product-img-zoom">
@@ -1698,9 +1709,9 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div>-->
                                     <!--end product card-->
-                                    <div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
+                                    <!--<div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
                                         <div class="product-cart-wrap">
                                             <div class="product-img-action-wrap">
                                                 <div class="product-img product-img-zoom">
@@ -1740,9 +1751,9 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div>-->
                                     <!--end product card-->
-                                    <div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
+                                    <!--<div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
                                         <div class="product-cart-wrap">
                                             <div class="product-img-action-wrap">
                                                 <div class="product-img product-img-zoom">
@@ -1785,9 +1796,9 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div>-->
                                     <!--end product card-->
-                                    <div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
+                                    <!--<div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
                                         <div class="product-cart-wrap">
                                             <div class="product-img-action-wrap">
                                                 <div class="product-img product-img-zoom">
@@ -1830,9 +1841,9 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div>-->
                                     <!--end product card-->
-                                    <div class="col-lg-1-5 col-md-4 col-12 col-sm-6 d-none d-xl-block">
+                                    <!--<div class="col-lg-1-5 col-md-4 col-12 col-sm-6 d-none d-xl-block">
                                         <div class="product-cart-wrap">
                                             <div class="product-img-action-wrap">
                                                 <div class="product-img product-img-zoom">
@@ -1872,7 +1883,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div>-->
                                     <!--end product card-->
                                 </div>
                                 <!--End product-grid-4-->
@@ -1880,7 +1891,7 @@
                             <!--En tab five-->
                             <div class="tab-pane fade" id="tab-six" role="tabpanel" aria-labelledby="tab-six">
                                 <div class="row product-grid-4">
-                                    <div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
+                                    <!--<div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
                                         <div class="product-cart-wrap mb-30">
                                             <div class="product-img-action-wrap">
                                                 <div class="product-img product-img-zoom">
@@ -1923,9 +1934,9 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div>-->
                                     <!--end product card-->
-                                    <div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
+                                    <!--<div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
                                         <div class="product-cart-wrap mb-30">
                                             <div class="product-img-action-wrap">
                                                 <div class="product-img product-img-zoom">
@@ -1968,9 +1979,9 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div>-->
                                     <!--end product card-->
-                                    <div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
+                                    <!--<div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
                                         <div class="product-cart-wrap mb-30">
                                             <div class="product-img-action-wrap">
                                                 <div class="product-img product-img-zoom">
@@ -2013,9 +2024,9 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div>-->
                                     <!--end product card-->
-                                    <div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
+                                    <!--<div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
                                         <div class="product-cart-wrap mb-30">
                                             <div class="product-img-action-wrap">
                                                 <div class="product-img product-img-zoom">
@@ -2055,9 +2066,9 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div>-->
                                     <!--end product card-->
-                                    <div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
+                                    <!--<div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
                                         <div class="product-cart-wrap mb-30">
                                             <div class="product-img-action-wrap">
                                                 <div class="product-img product-img-zoom">
@@ -2100,9 +2111,9 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div>-->
                                     <!--end product card-->
-                                    <div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
+                                    <!--<div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
                                         <div class="product-cart-wrap">
                                             <div class="product-img-action-wrap">
                                                 <div class="product-img product-img-zoom">
@@ -2142,9 +2153,9 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div>-->
                                     <!--end product card-->
-                                    <div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
+                                    <!--<div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
                                         <div class="product-cart-wrap">
                                             <div class="product-img-action-wrap">
                                                 <div class="product-img product-img-zoom">
@@ -2184,9 +2195,9 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div>-->
                                     <!--end product card-->
-                                    <div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
+                                    <!--<div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
                                         <div class="product-cart-wrap">
                                             <div class="product-img-action-wrap">
                                                 <div class="product-img product-img-zoom">
@@ -2229,9 +2240,9 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div>-->
                                     <!--end product card-->
-                                    <div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
+                                    <!--<div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
                                         <div class="product-cart-wrap">
                                             <div class="product-img-action-wrap">
                                                 <div class="product-img product-img-zoom">
@@ -2274,9 +2285,9 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div>-->
                                     <!--end product card-->
-                                    <div class="col-lg-1-5 col-md-4 col-12 col-sm-6 d-none d-xl-block">
+                                    <!--<div class="col-lg-1-5 col-md-4 col-12 col-sm-6 d-none d-xl-block">
                                         <div class="product-cart-wrap">
                                             <div class="product-img-action-wrap">
                                                 <div class="product-img product-img-zoom">
@@ -2316,7 +2327,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div>-->
                                     <!--end product card-->
                                 </div>
                                 <!--End product-grid-4-->
@@ -2324,7 +2335,7 @@
                             <!--En tab six-->
                             <div class="tab-pane fade" id="tab-seven" role="tabpanel" aria-labelledby="tab-seven">
                                 <div class="row product-grid-4">
-                                    <div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
+                                    <!--<div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
                                         <div class="product-cart-wrap mb-30">
                                             <div class="product-img-action-wrap">
                                                 <div class="product-img product-img-zoom">
@@ -2367,9 +2378,9 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div>-->
                                     <!--end product card-->
-                                    <div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
+                                    <!--<div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
                                         <div class="product-cart-wrap mb-30">
                                             <div class="product-img-action-wrap">
                                                 <div class="product-img product-img-zoom">
@@ -2412,9 +2423,9 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div>-->
                                     <!--end product card-->
-                                    <div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
+                                    <!--<div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
                                         <div class="product-cart-wrap mb-30">
                                             <div class="product-img-action-wrap">
                                                 <div class="product-img product-img-zoom">
@@ -2457,9 +2468,9 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div>-->
                                     <!--end product card-->
-                                    <div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
+                                    <!--<div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
                                         <div class="product-cart-wrap mb-30">
                                             <div class="product-img-action-wrap">
                                                 <div class="product-img product-img-zoom">
@@ -2499,9 +2510,9 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div>-->
                                     <!--end product card-->
-                                    <div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
+                                    <!--<div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
                                         <div class="product-cart-wrap mb-30">
                                             <div class="product-img-action-wrap">
                                                 <div class="product-img product-img-zoom">
@@ -2544,9 +2555,9 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div>-->
                                     <!--end product card-->
-                                    <div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
+                                    <!--<div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
                                         <div class="product-cart-wrap">
                                             <div class="product-img-action-wrap">
                                                 <div class="product-img product-img-zoom">
@@ -2586,9 +2597,9 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div>-->
                                     <!--end product card-->
-                                    <div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
+                                    <!--<div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
                                         <div class="product-cart-wrap">
                                             <div class="product-img-action-wrap">
                                                 <div class="product-img product-img-zoom">
@@ -2628,9 +2639,9 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div>-->
                                     <!--end product card-->
-                                    <div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
+                                    <!--<div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
                                         <div class="product-cart-wrap">
                                             <div class="product-img-action-wrap">
                                                 <div class="product-img product-img-zoom">
@@ -2673,9 +2684,9 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div>-->
                                     <!--end product card-->
-                                    <div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
+                                    <!--<div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
                                         <div class="product-cart-wrap">
                                             <div class="product-img-action-wrap">
                                                 <div class="product-img product-img-zoom">
@@ -2718,9 +2729,9 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div>-->
                                     <!--end product card-->
-                                    <div class="col-lg-1-5 col-md-4 col-12 col-sm-6 d-none d-xl-block">
+                                    <!--<div class="col-lg-1-5 col-md-4 col-12 col-sm-6 d-none d-xl-block">
                                         <div class="product-cart-wrap">
                                             <div class="product-img-action-wrap">
                                                 <div class="product-img product-img-zoom">
@@ -2760,7 +2771,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div>-->
                                     <!--end product card-->
                                 </div>
                                 <!--End product-grid-4-->
@@ -2837,8 +2848,8 @@
                             <div class="price-filter-inner">
                                 <div id="slider-range" class="mb-20"></div>
                                 <div class="d-flex justify-content-between">
-                                    <div class="caption">From: 0 <strong id="slider-range-value1" class="text-brand"></strong></div>
-                                    <div class="caption">To: 10 <strong id="slider-range-value2" class="text-brand"></strong></div>
+                                    <div class="caption">From: <strong id="slider-range-value1" class="text-brand"></strong></div>
+                                    <div class="caption">To: <strong id="slider-range-value2" class="text-brand"></strong></div>
                                 </div>
                             </div>
                         </div>
@@ -2910,8 +2921,8 @@
                 </div>
             </div>
         </div>
-        <section class="popular-categories section-padding">
-            <!--div class="container">
+        <!--<section class="popular-categories section-padding">
+            <div class="container">
                 <div class="section-title">
                     <div class="title">
                         <h3>Shop by Categories</h3>
@@ -3011,8 +3022,8 @@
                         </div>
                     </div>
                 </div>
-            </div-->
-        </section>
+            </div>
+        </section>-->
         <!--End category slider-->
         <section class="section-padding mb-30">
             <div class="container">
