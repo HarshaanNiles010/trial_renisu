@@ -185,3 +185,38 @@ def update_cart(request):
     
     context = render_to_string("core/async/cart-list.html", {"cart_data":request.session['cart_data_obj'], 'totalCartItems':len(request.session['cart_data_obj']), 'cart_total_amount':cart_total_amt})
     return JsonResponse({"data":context, "totalCartItems":len(request.session['cart_data_obj'])})
+
+
+def about_us(request):
+    products = Product.objects.all()
+    context = {
+        "products":products
+    }
+    return render(request, "core/about_us.html", context)
+
+def purchasing_guide(request):
+    products = Product.objects.all()
+    categories = Category.objects.all()
+    context = {
+        "products":products,
+        "categories":categories
+    }
+    return render(request, "core/purchasing_guide.html", context)
+
+def TOS(request):
+    products = Product.objects.all()
+    categories = Category.objects.all()
+    context = {
+        "products":products,
+        "categories":categories
+    }
+    return render(request,"core/terms_of_service.html", context)
+
+def privacy_policy(request):
+    products = Product.objects.all()
+    categories = Category.objects.all()
+    context = {
+        "products":products,
+        "categories":categories
+    }
+    return render(request,"core/privacy_policy.html", context)

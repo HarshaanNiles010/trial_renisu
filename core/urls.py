@@ -15,6 +15,10 @@ urlpatterns = [
      path("cart/", views.cart_view, name="cart"),
      path("delete-from-cart/",views.delete_item_from_cart, name="delete-from-cart"),
      path("update-cart/",views.update_cart,name="update-cart"),
+     path("about_us/", views.about_us, name="about_us"),
+     path("purchasing_guide/", views.purchasing_guide, name="purchasing_guide"),
+     path("terms_of_service/", views.TOS, name="terms_of_service"),
+     path("privacy_policy/", views.privacy_policy, name="privacy_policy"),
      # This url is only used for work in progress apps
      path('wip/',views.wip_view, name = "wip" )
 ]
