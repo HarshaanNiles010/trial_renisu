@@ -8,6 +8,7 @@ from django.db.models import Count, Avg
 from django.urls import reverse
 from django.conf import settings
 from django.contrib import messages
+from django.template.loader import render_to_string
 
 def index(request):
     products = Product.objects.all()
@@ -150,3 +151,72 @@ def cart_view(request):
         #return render(request,"core/cart.html",{"cart_data":'', 'totalCartItems':len(request.session['cart_data_obj']), 'cart_total_amount':cart_total_amt})
         messages.warning(request,"your cart is empty")
         return redirect("core:index")
+
+def delete_item_from_cart(request):
+    cart_total_amt = 0
+    product_id = str(request.GET['id'])
+    if 'cart_data_obj' in request.session:
+        if product_id in request.session['cart_data_obj']:
+            cart_data = request.session['cart_data_obj']
+            del request.session['cart_data_obj'][product_id]
+            request.session['cart_data_obj'] = cart_data
+
+    if 'cart_data_obj' in request.session:
+        for p_id, item in request.session['cart_data_obj'].items():
+            cart_total_amt += int(item['qty']) * float(item['price'])
+    
+    context = render_to_string("core/async/cart-list.html", {"cart_data":request.session['cart_data_obj'], 'totalCartItems':len(request.session['cart_data_obj']), 'cart_total_amount':cart_total_amt})
+    return JsonResponse({"data":context, "totalCartItems":len(request.session['cart_data_obj'])})
+
+def update_cart(request):
+    cart_total_amt = 0
+    product_id = str(request.GET['id'])
+    product_qty = request.GET['qty']
+    
+    if 'cart_data_obj' in request.session:
+        if product_id in request.session['cart_data_obj']:
+            cart_data = request.session['cart_data_obj']
+            cart_data[str(request.GET['id'])]['qty'] = product_qty
+            request.session['cart_data_obj'] = cart_data
+
+    if 'cart_data_obj' in request.session:
+        for p_id, item in request.session['cart_data_obj'].items():
+            cart_total_amt += int(item['qty']) * float(item['price'])
+    
+    context = render_to_string("core/async/cart-list.html", {"cart_data":request.session['cart_data_obj'], 'totalCartItems':len(request.session['cart_data_obj']), 'cart_total_amount':cart_total_amt})
+    return JsonResponse({"data":context, "totalCartItems":len(request.session['cart_data_obj'])})
+
+
+def about_us(request):
+    products = Product.objects.all()
+    context = {
+        "products":products
+    }
+    return render(request, "core/about_us.html", context)
+
+def purchasing_guide(request):
+    products = Product.objects.all()
+    categories = Category.objects.all()
+    context = {
+        "products":products,
+        "categories":categories
+    }
+    return render(request, "core/purchasing_guide.html", context)
+
+def TOS(request):
+    products = Product.objects.all()
+    categories = Category.objects.all()
+    context = {
+        "products":products,
+        "categories":categories
+    }
+    return render(request,"core/terms_of_service.html", context)
+
+def privacy_policy(request):
+    products = Product.objects.all()
+    categories = Category.objects.all()
+    context = {
+        "products":products,
+        "categories":categories
+    }
+    return render(request,"core/privacy_policy.html", context)

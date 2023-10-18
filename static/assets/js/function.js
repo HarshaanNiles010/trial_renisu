@@ -119,9 +119,62 @@ $(".add-to-cart-btn").on("click",function(){
     })
 })
 
-$(".delete-product").on("click", function(){
-    let product_id = $(this).attr("data-product")
-    let this_val = $(this)
-    console.log(product_id);
-    console.log(this_val);
+$(document).ready(function(){
+    $("#cart-list").on("click", ".delete-product", function(){
+        let product_id = $(this).attr("data-product")
+        let this_val = $(this)
+        console.log(product_id);
+        console.log(this_val);
+    
+        $.ajax({
+            url:'/delete-from-cart',
+            data:{
+                'id':product_id
+            },
+            dataType: 'json',
+            beforeSend: function(){
+                console.log("IN before send");
+                this_val.hide()
+                console.log("IN after send");
+            },
+            success: function(response){
+                console.log("Starting success");
+                this_val.show()
+                $("#cart-items-count").text(response.totalCartItems)
+                $("#cart-list").html(response.data)
+                console.log("successfully removed");
+            },
+            error: function(response){
+                alert('error');
+            }
+        })
+    })
+
+    $("#cart-list").on("click", ".update-product" ,function(){
+        console.log("Updating the cart!!")
+        let product_id = $(this).attr("data-product")
+        let this_val = $(this)
+        let product_quantity = $(".product-qty-"+product_id).val()
+    
+        console.log("PRoduct ID:",  product_id);
+        console.log("PRoduct QTY:",  product_quantity);
+    
+        $.ajax({
+            url: "/update-cart",
+            data: {
+                "id": product_id,
+                "qty": product_quantity,
+            },
+            dataType: "json",
+            beforeSend: function(){
+                this_val.hide()
+            },
+            success: function(response){
+                this_val.show()
+                $(".cart-items-count").text(response.totalcartitems)
+                $("#cart-list").html(response.data)
+            }
+        })
+    
+    })
 })
