@@ -120,7 +120,7 @@ $(".add-to-cart-btn").on("click",function(){
 })
 
 $(document).ready(function(){
-    $(".delete-product").on("click", function(){
+    $("#cart-list").on("click", ".delete-product", function(){
         let product_id = $(this).attr("data-product")
         let this_val = $(this)
         console.log(product_id);
@@ -143,35 +143,38 @@ $(document).ready(function(){
                 $("#cart-items-count").text(response.totalCartItems)
                 $("#cart-list").html(response.data)
                 console.log("successfully removed");
+            },
+            error: function(response){
+                alert('error');
             }
         })
     })
-})
 
-$(".update-product").on("click", function(){
-    console.log("Updating the cart!!")
-    let product_id = $(this).attr("data-product")
-    let this_val = $(this)
-    let product_quantity = $(".product-qty-"+product_id).val()
-
-    console.log("PRoduct ID:",  product_id);
-    console.log("PRoduct QTY:",  product_quantity);
-
-    $.ajax({
-        url: "/update-cart",
-        data: {
-            "id": product_id,
-            "qty": product_quantity,
-        },
-        dataType: "json",
-        beforeSend: function(){
-            this_val.hide()
-        },
-        success: function(response){
-            this_val.show()
-            $(".cart-items-count").text(response.totalcartitems)
-            $("#cart-list").html(response.data)
-        }
+    $("#cart-list").on("click", ".update-product" ,function(){
+        console.log("Updating the cart!!")
+        let product_id = $(this).attr("data-product")
+        let this_val = $(this)
+        let product_quantity = $(".product-qty-"+product_id).val()
+    
+        console.log("PRoduct ID:",  product_id);
+        console.log("PRoduct QTY:",  product_quantity);
+    
+        $.ajax({
+            url: "/update-cart",
+            data: {
+                "id": product_id,
+                "qty": product_quantity,
+            },
+            dataType: "json",
+            beforeSend: function(){
+                this_val.hide()
+            },
+            success: function(response){
+                this_val.show()
+                $(".cart-items-count").text(response.totalcartitems)
+                $("#cart-list").html(response.data)
+            }
+        })
+    
     })
-
 })
