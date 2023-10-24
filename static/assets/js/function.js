@@ -46,38 +46,7 @@ $("#commentForm").submit(function(e){
 })
 
 
-// Add to cart functionality
-//$("#add-to-cart-btn").on("click",function(){
-//    console.log("making add to cart");
-//    let quantity = $("#product-quantity").val();
-    //console.log(quantity);
-//    let product_title = $(".product-title").val();
-    //console.log(product_title);
-//    let product_id = $(".product-id").val();
-    //console.log(product_id);
-//    let product_price = $("#current-product-price").text();
-    //console.log(product_price);
-//    let this_val = $(this);
 
-//    $.ajax({
-//        url: '/add-to-cart',
-//        data: {
-//            'id':product_id,
-//            'qty': quantity,
-//            'title': product_title,
-//            'price': product_price,
-//        },
-//        dataType: 'json',
-//        beforeSend: function(){
-//            console.log("Adding product to cart");
-//        },
-//        success: function(response){
-//            this_val.html("<i class='fas fa-check-circle'></i>")
-//            console.log("added product to cart");
-//            $(".cart-items-count").text(response.totalCartItems)
-//        }
-//    })
-//})
 
 $(".add-to-cart-btn").on("click",function(){
     let this_val = $(this)
@@ -176,5 +145,87 @@ $(document).ready(function(){
             }
         })
     
+    })
+
+    $(document).on("click", ".add-to-wishlist", function(){
+        let product_id = $(this).attr("data-product-item")
+        let this_val = $(this)
+        console.log(product_id);
+        console.log(this_val);
+        $.ajax({
+            url: "/add-to-wishlist",
+            data: {
+                "id":product_id
+            },
+            dataType: "json",
+            beforeSend: function(){
+                console.log("adding to wishlist...");
+            },
+            success: function(response){
+                this_val.html("<i class='fas fa-heart text-danger'></i>")
+                if (response.bool === true) {
+                    console.log("Added to wishlist...");
+                }
+            }
+        })
+    })
+
+    $(document).on("click",".delete-wishlist-product", function(){
+        let product_id = $(this).attr("data-wishlist-product")
+        let this_val = $(this)
+        console.log(product_id);
+        console.log(this_val);
+        $.ajax({
+            url:"/remove-from-wishlist",
+            data:{
+                "id":product_id
+            },
+            dataType: "json",
+            beforeSend: function(){
+                console.log("Deleting product from wishlist");
+            },
+            success: function(response){
+                $("#wishlist-list").html(response.data)
+            }
+        })
+    })
+
+    $(document).on("submit","#contact-form-ajax", function(e){
+        console.log("submiting");
+        e.preventDefault()
+        let full_name = $("#full_name").val()
+        let email = $("#email").val()
+        let phone = $("#phone").val()
+        let subject = $("#subject").val()
+        let message = $("#message").val()
+        
+        //console.log(full_name);
+        //console.log(email);
+        //console.log(phone);
+        //console.log(subject);
+        //console.log(message);
+        $.ajax({
+            url: "/ajax-contact-form",
+            data: {
+                "full_name":full_name,
+                "email":email,
+                "phone":phone,
+                "subject":subject,
+                "message":message
+            },
+            dataType: "json",
+            beforeSend: function(){
+                console.log("sending data");
+            },
+            success: function(res){
+                console.log("sent data");
+                $(".contact_us_p").hide()
+                $("#conatct-form-ajax").hide()
+                $("#message-response").html("Message sent successfully")
+            },
+            error: function(){
+                alert("error")
+            }
+        })
     })
 })

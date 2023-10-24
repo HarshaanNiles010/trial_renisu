@@ -10,6 +10,8 @@ from django.conf import settings
 from django.contrib import messages
 from django.template.loader import render_to_string
 from django.contrib.auth.decorators import login_required
+from django.core import serializers
+from userauths.models import ContactUs
 
 def index(request):
     products = Product.objects.all()
@@ -255,3 +257,68 @@ def order_detail(request, id):
     }
     return render(request,'core/order-detail.html', context)
 
+@login_required
+def wishlist_view(request):
+    wishlist = wishlist_model.objects.all()
+    context = {
+        "wishlists":wishlist
+    }
+    return render(request,"core/wishlist.html", context)
+
+def add_to_wishlist(request):
+    product_id = request.GET['id']
+    product = Product.objects.get(id=product_id)
+    context = {}
+    wishlist_count = wishlist_model.objects.filter(product=product, user=request.user).count()
+    
+    if wishlist_count > 0:
+        context = {
+            "bool": True
+        }
+    else:
+        new_wishlist = wishlist_model.objects.create(
+            product = product,
+            user = request.user
+        )
+        context = {
+            "bool" : True
+        }
+    
+    return JsonResponse(context)
+
+def remove_from_wishlist(request):
+    product_id = request.GET['id']
+    wishlist = wishlist_model.objects.filter(user=request.user)
+    wishlist_id = wishlist_model.objects.get(id = product_id)
+    delete_product = wishlist_id.delete()
+    
+    context = {
+        "bool":True,
+        "wishlists":wishlist
+    }
+    wishlist_json = serializers.serialize('json', wishlist)
+    t = render_to_string('core/async/wishlist-list.html', context)
+    return JsonResponse({'data':t,'wishlists':wishlist_json})
+
+
+def contact(request):
+    return render(request, "core/contact.html")
+
+def ajax_contact_form(request):
+    full_name = request.GET['full_name']
+    email = request.GET['email']
+    phone = request.GET['phone']
+    subject = request.GET['subject']
+    message = request.GET['message']
+    contact = ContactUs.objects.create(
+        full_name = full_name,
+        email = email,
+        phone = phone,
+        subject = subject,
+        message = message
+    )
+    data = {
+        "bool": True,
+        "message":"message Sent Successfully"
+    }
+    return JsonResponse({"data":data})

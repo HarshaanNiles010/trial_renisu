@@ -37,6 +37,16 @@ urlpatterns = [
      path("dashboard/", views.customer_dashboard, name="dashboard"),
      
      path("dashboard/order/<int:id>", views.order_detail, name="order-detail"),
+     
+     path("wishlist/", views.wishlist_view, name="wishlist"),
+     
+     path("add-to-wishlist/", views.add_to_wishlist, name="add-to-wishlist"),
+     
+     path("remove-from-wishlist/", views.remove_from_wishlist, name="remove-from-wishlist"),
+
+     path("contact/", views.contact, name="contact"),
+     
+     path("ajax-contact-form/", views.ajax_contact_form, name="ajax-contact-form"),
      # This url is only used for work in progress apps
      path('wip/',views.wip_view, name = "wip" )
 ]
