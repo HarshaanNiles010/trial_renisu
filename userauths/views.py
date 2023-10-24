@@ -1,9 +1,10 @@
+from django.http import JsonResponse
 from django.shortcuts import redirect, render
 from userauths.forms import UserRegisterForm, ProfileForm
 from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
 from django.conf import settings
-from userauths.models import User, Profile
+from userauths.models import User, Profile, ContactUs
 
 # Create your views here.
 #User = settings.AUTH_USER_MODEL
