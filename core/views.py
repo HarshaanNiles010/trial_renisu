@@ -9,6 +9,7 @@ from django.urls import reverse
 from django.conf import settings
 from django.contrib import messages
 from django.template.loader import render_to_string
+from django.contrib.auth.decorators import login_required
 
 def index(request):
     products = Product.objects.all()
@@ -220,3 +221,37 @@ def privacy_policy(request):
         "categories":categories
     }
     return render(request,"core/privacy_policy.html", context)
+
+@login_required
+def customer_dashboard(request):
+    orders = CartOrder.objects.filter(user=request.user).order_by("-id")
+    address = Address.objects.filter(user=request.user)
+    
+    if request.method == "POST":
+        address = request.POST.get("address")
+        mobile = request.POST.get("mobile")
+
+        new_address = Address.objects.create(
+            user=request.user,
+            address=address,
+            mobile=mobile,
+        )
+        messages.success(request, "Address Added Successfully.")
+        return redirect("core:dashboard")
+    else:
+        print("Error")
+        
+    context = {
+        "orders":orders,
+        "address":address
+    }
+    return render(request,"core/dashboard.html", context)
+
+def order_detail(request, id):
+    order = CartOrder.objects.get(user=request.user, id =id)
+    products = CartOrderProducts.objects.filter(order=order)
+    context = {
+        "products": products
+    }
+    return render(request,'core/order-detail.html', context)
+

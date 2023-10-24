@@ -34,6 +34,9 @@ urlpatterns = [
      
      path("privacy_policy/", views.privacy_policy, name="privacy_policy"),
      
+     path("dashboard/", views.customer_dashboard, name="dashboard"),
+     
+     path("dashboard/order/<int:id>", views.order_detail, name="order-detail"),
      # This url is only used for work in progress apps
      path('wip/',views.wip_view, name = "wip" )
 ]
