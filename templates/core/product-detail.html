@@ -102,7 +102,7 @@
                                                         <!--<input type="hidden" class="current-product-price-{{ product.price }}" value="{{ product.price }}">-->
 
                                                     <button type="submit" class="button button-add-to-cart add-to-cart-btn" data-index="{{product.id}}" id="add-tocart-btn"><i class="fi-rs-shopping-cart"></i>Add to cart</button>
-                                                    <a aria-label="Add To Wishlist" class="action-btn hover-up" href="shop-wishlist.html"><i class="fi-rs-heart"></i></a>
+                                                    <a aria-label="Add To Wishlist" class="action-btn add-to-wishlist" data-product-item="{{product.id}}"><i class="fi-rs-heart"></i></a>
                                                     <!--<a aria-label="Compare" class="action-btn hover-up" href="shop-compare.html"><i class="fi-rs-shuffle"></i></a>-->
                                                 </div>
                                             </div>
@@ -130,7 +130,7 @@
                                                     <p> {{product.description|safe}} </p>
                                                 </div>
                                             </div>
-                                            <div class="tab-pane fade show active" id="Additional-info">
+                                            <!--<div class="tab-pane fade show active" id="Additional-info">
                                                 <table class="font-md">
                                                     <tbody>
                                                         <tr class="stand-up">
@@ -219,7 +219,7 @@
                                                         </tr>
                                                     </tbody>
                                                 </table>
-                                            </div>
+                                            </div>-->
                                             <div class="tab-pane fade show active" id="Reviews">
                                                 <!--Comments-->
                                                 <div class="comments-area">

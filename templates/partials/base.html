@@ -131,7 +131,7 @@
                     <div class="col-xl-3 col-lg-4">
                         <div class="header-info">
                             <ul>
-                                <li><a href="page-about.htlm">About Us</a></li>
+                                <li><a href="{% url 'core:about_us'%}">About Us</a></li>
                                 <li><a href="{% url 'core:dashboard' %}">My Account</a></li>
                                 <li><a href="{% url 'core:wishlist' %}">Wishlist</a></li>
                                 <li><a href="shop-order.html">Order Tracking</a></li>
@@ -225,13 +225,16 @@
                                     </a>
                                     <a href="shop-compare.html"><span class="lable ml-0">Compare</span></a>
                                 </div-->
+                                {%if request.user.is_authenticated %}
                                 <div class="header-action-icon-2">
                                     <a href="{% url 'core:wishlist' %}">
                                         <img class="svgInject" alt="Nest" src="{% static 'assets/imgs/theme/icons/icon-heart.svg' %}" />
+                                        
                                         <span class="pro-count blue">{{wishlist.count}}</span>
                                     </a>
                                     <a href="{% url 'core:wishlist' %}"><span class="lable">Wishlist</span></a>
                                 </div>
+                                {% endif %}
                                 <div class="header-action-icon-2">
                                     <a class="mini-cart-icon" href="{%url 'core:cart'%}">
                                         <img alt="Nest" src="{% static 'assets/imgs/theme/icons/icon-cart.svg' %}" />
@@ -248,17 +251,20 @@
                                     </div>
                                 </div>
                                 <div class="header-action-icon-2">
-                                    <a href="page-account.html">
+                                    <!-- Maybe i have to make a new link here? Maybe, Maybe not, ehhhhhhh-->
+                                    <a>
                                         <img class="svgInject" alt="Nest" src="{% static 'assets/imgs/theme/icons/icon-user.svg' %}" />
                                     </a>
-                                    <a href="page-account.html"><span class="lable ml-0">Account</span></a>
+                                    <a><span class="lable ml-0">Account</span></a>
                                     <div class="cart-dropdown-wrap cart-dropdown-hm2 account-dropdown">
                                         <ul>
                                             <li><a href="{% url 'core:dashboard' %}"><i class="fi fi-rs-user mr-10"></i>My Account</a></li>
                                             <!-- Maybe fix this later-->
                                             <li><a href="{% url 'core:dashboard' %}"><i class="fi fi-rs-location-alt mr-10"></i>Order Tracking</a></li>
                                             <!--<li><a href="page-account.html"><i class="fi fi-rs-label mr-10"></i>My Voucher</a></li>-->
+                                            {% if request.user.is_authenticated %}
                                             <li><a href="{% url 'core:wishlist' %}"><i class="fi fi-rs-heart mr-10"></i>My Wishlist</a></li>
+                                            {% endif %}
                                             <li><a href="{% url 'core:dashboard' %}"><i class="fi fi-rs-settings-sliders mr-10"></i>Setting</a></li>
                                             {% if request.user.is_authenticated %}
                                             <li><a href="{% url 'userauths:sign-out'%}"><i class="fi fi-rs-sign-out mr-10"></i>Sign out</a></li>
@@ -421,15 +427,17 @@
                                         <ul class="sub-menu">
                                             <li><a href="{% url 'core:about_us'%}">About Us</a></li>
                                             <!--<li><a href="{% url 'core:contact' %}">Contact</a></li>-->
+                                            {% if request.user.is_authenticated %}
                                             <li><a href="{% url 'core:dashboard' %}">My Account</a></li>
-                                            <li><a href="{% url 'core:wip'%}">Login</a></li>
+                                            {% endif %}
+                                            <!--<li><a href="{% url 'core:wip'%}">Login</a></li>-->
                                             <li><a href="{% url 'core:wip'%}">Register</a></li>
-                                            <li><a href="{% url 'core:wip'%}">Forgot password</a></li>
-                                            <li><a href="{% url 'core:wip'%}">Reset password</a></li>
+                                            <!--<li><a href="{% url 'core:wip'%}">Forgot password</a></li>
+                                            <li><a href="{% url 'core:wip'%}">Reset password</a></li>-->
                                             <li><a href="{% url 'core:purchasing_guide'%}">Purchase Guide</a></li>
                                             <li><a href="{% url 'core:privacy_policy'%}">Privacy Policy</a></li>
                                             <li><a href="{% url 'core:terms_of_service'%}">Terms of Service</a></li>
-                                            <li><a href="{% url 'core:wip'%}">404 Page</a></li>
+                                            <!--<li><a href="{% url 'core:wip'%}">404 Page</a></li>-->
                                         </ul>
                                     </li>
                                     <li>
@@ -459,7 +467,7 @@
                                     <img alt="Nest" src="{% static 'assets/imgs/theme/icons/icon-cart.svg' %}" />
                                     <span class="pro-count white cart-items-count">{{request.session.cart_data_obj|length}}</span>
                                 </a>
-                                <div class="cart-dropdown-wrap cart-dropdown-hm2">
+                                <!--<div class="cart-dropdown-wrap cart-dropdown-hm2">
                                     
                                     <div class="shopping-cart-footer">
                                         <div class="shopping-cart-button">
@@ -467,7 +475,7 @@
                                             <a href="">Checkout</a>
                                         </div>
                                     </div>
-                                </div>
+                                </div>-->
                             </div>
                         </div>
                     </div>
