@@ -4050,9 +4050,11 @@ table .product-thumbnail img {
 
 .product-cart-wrap .product-img-action-wrap {
     position: relative;
-    background-color: #fff;
+    background-color: #ffffff;
     overflow: hidden;
-    max-height: 320px;
+    width: auto;
+    height: 200px;
+    object-fit: fit;
     padding: 25px 25px 0 25px;
 }
 
