@@ -56,12 +56,15 @@
                                                                 {{form.full_name}}
                                                             </div>
                                                             <div class="mb-3">
+                                                                {% csrf_token %}
                                                                 {{form.bio}}
                                                             </div>
                                                             <div class="mb-3">
+                                                                {% csrf_token %}
                                                                 {{form.phone}}
                                                             </div>
                                                             <div class="mb-3">
+                                                                {% csrf_token %}
                                                                 {{form.image}}
                                                             </div>
                                                             <button class="bxtn btn-succees" type="submit">Save Changes</button>

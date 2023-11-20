@@ -13,7 +13,7 @@
             <div class="col-xl-10 col-lg-12 m-auto">
                 <div class="mb-50">
                     <h1 class="heading-2 mb-10">Your Wishlist</h1>
-                    <h6 class="text-body">There are <span class="text-brand">5</span> products in this list</h6>
+                    <h6 class="text-body">There are <span class="text-brand">{{wishlists.count}}</span> products in this list</h6>
                 </div>
                 <div class="table-responsive shopping-summery">
                     <table class="table table-wishlist">
@@ -32,9 +32,6 @@
                         </thead>
                         <tbody>
                             {% for w in wishlists %}
-
-                            
-                            
                             <tr class="pt-30">
                                 <td class="custome-checkbox pl-30">
                                     <input class="form-check-input" type="checkbox" name="checkbox" id="exampleCheckbox1" value="" />

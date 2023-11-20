@@ -15,7 +15,7 @@
                 <h1 class="heading-2 mb-10">Your Cart</h1>
                 <div class="d-flex justify-content-between">
                     <h6 class="text-body">There are <span class="text-brand" id="cart-items-count">{{ totalcartitems }}</span> products in your cart</h6>
-                    <h6 class="text-body"><a href="#" class="text-muted"><i class="fi-rs-trash mr-5"></i>Clear Cart</a></h6>
+                    <!--<h6 class="text-body"><a href="#" class="text-muted"><i class="fi-rs-trash mr-5"></i>Clear Cart</a></h6> -->
                 </div>
             </div>
         </div>
@@ -73,6 +73,7 @@
                     <a class="btn "><i class="fi-rs-arrow-left mr-10"></i>Continue Shopping</a>
                     <a class="btn  mr-10 mb-sm-15"><i class="fi-rs-refresh mr-10"></i>Update Cart</a>
                 </div>
+                
                 <div class="row mt-50">
                     <div class="col-lg-7">
                         <div class="calculate-shiping p-40 border-radius-15 border">
@@ -367,7 +368,7 @@
                                         <h6 class="text-muted">Subtotal</h6>
                                     </td>
                                     <td class="cart_total_amount">
-                                        <h4 class="text-brand text-end">${{cart_total_amount|floatformat:2}}</h4>
+                                        <h4 class="text-brand text-end">${{cart_total_amount|floatformat:0}}</h4>
                                     </td>
                                 </tr>
                                 <tr>
@@ -387,15 +388,16 @@
                                         <h6 class="text-muted">Total</h6>
                                     </td>
                                     <td class="cart_total_amount">
-                                        <h4 class="text-brand text-end">${{cart_total_amount|floatformat:2}}</h4>
+                                        <h4 class="text-brand text-end">${{cart_total_amount|floatformat:0}}</h4>
                                     </td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
-                    {% if totalcartitems %}
+                    {% if True %}
                     <a href="#" class="btn mb-20 w-100">Proceed To CheckOut<i class="fi-rs-sign-out ml-15"></i></a>
-                    {% endif %}                    </div>
+                    {% endif %} 
+                </div>
             </div>
         </div>
     </div>
