@@ -24,9 +24,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-8b*l^kf#w170jet@jx+g&((4+&3vmik&1o2_^yvkx6*e3u#!&*'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['renisu.ca','44.224.108.163']
+ALLOWED_HOSTS = ['renisu.ca','renisu.com','renisu.in','44.229.40.149']
 
 
 # Application definition
