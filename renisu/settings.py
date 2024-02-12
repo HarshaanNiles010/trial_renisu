@@ -24,10 +24,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-8b*l^kf#w170jet@jx+g&((4+&3vmik&1o2_^yvkx6*e3u#!&*'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
-
-ALLOWED_HOSTS = ['renisu.ca','renisu.com','renisu.in','44.229.40.149']
-
+# Chaning Debug to true to run in development mode
+DEBUG = True
+# making a new Allowed Host list to work with in development
+#ALLOWED_HOSTS = ['renisu.ca','renisu.com','renisu.in','44.229.40.149']
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -46,6 +47,7 @@ INSTALLED_APPS = [
     'taggit',
     'ckeditor',
     'ckeditor_uploader',
+    'maintenance_mode',
     
 ]
 
@@ -57,6 +59,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'maintenance_mode.middleware.MaintenanceModeMiddleware',
 ]
 
 ROOT_URLCONF = 'renisu.urls'
@@ -167,3 +170,6 @@ CKEDITOR_CONFIGS = {
     }
 }
 
+# if True the maintenance-mode will be activated
+MAINTENANCE_MODE = True
+MAINTENANCE_MODE_IGNORE_ADMIN_SITE = True
